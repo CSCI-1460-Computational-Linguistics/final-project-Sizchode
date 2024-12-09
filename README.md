@@ -35,7 +35,7 @@ The following equations, derived from the paper, are implemented in the model:
    p(a|q) = \prod_{t=1}^{|a|} p(a_t | a_{<t}, q)
    ```
 
-2. **Encoder's Output**:
+3. **Encoder's Output**:
    ```math
    h^L_k = \text{LSTM}(x_k, h^L_{k-1})
    ```
