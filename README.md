@@ -33,7 +33,7 @@ The following equations, derived from the paper, are implemented in the model:
 1. **Decoder's Output Probability**:
    ```math
    p(a|q) = \prod_{t=1}^{|a|} p(a_t | a_{<t}, q)
-   ```
+   
 
 2. **Encoder's Output**:
    ```math
