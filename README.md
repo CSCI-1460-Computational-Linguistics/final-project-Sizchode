@@ -1,2 +1,2 @@
 # final-project-Sizchode
-final-project-Sizchode created by GitHub Classroom
+This is a project for final project 3
