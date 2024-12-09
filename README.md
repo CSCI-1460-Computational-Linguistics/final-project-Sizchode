@@ -13,7 +13,7 @@ The main objective is to maximize the likelihood of generating the correct logic
   - A decoder, initialized with the encoder's final hidden and cell states, generates the logical form tokens step-by-step.
   
 - **Attention Mechanism**:
-  - Implements Bahdanau-style additive attention to compute a weighted context vector from encoder hidden states for each decoder step.
+  - Implements attention to compute a weighted context vector from encoder hidden states for each decoder step.
 
 - **Loss Function**:
   - Uses negative log-likelihood loss (`NLLLoss`) with padding tokens ignored during computation.
@@ -31,36 +31,36 @@ The following equations, derived from the paper, are implemented in the model:
 
 ### Encoder-Decoder Framework
 1. **Decoder's Output Probability**:
-   \[
+   $$
    p(a|q) = \prod_{t=1}^{|a|} p(a_t | a_{<t}, q)
-   \]
+   $$
 
 2. **Encoder's Output**:
-   \[
+   $$
    h^L_k = \text{LSTM}(x_k, h^L_{k-1})
-   \]
+   $$
 
 ### Attention Mechanism
 3. **Attention Scores**:
-   \[
+   $$
    s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}
-   \]
+   $$
 
 4. **Context Vector**:
-   \[
+   $$
    c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k
-   \]
+   $$
 
 5. **Combined Representation**:
-   \[
+   $$
    h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)
-   \]
+   $$
 
 ### Loss Function
 6. **Objective Function**:
-   \[
+   $$
    \mathcal{L} = -\sum_{(q,a) \in D} \log p(a|q)
-   \]
+   $$
 
 ---
 
