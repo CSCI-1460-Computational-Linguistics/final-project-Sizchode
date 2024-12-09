@@ -31,35 +31,32 @@ The following equations, derived from the paper, are implemented in the model:
 
 ### Encoder-Decoder Framework
 1. **Decoder's Output Probability**:
+
    $p(a|q) = \prod_{t=1}^{|a|} p(a_t | a_{<t}, q)$
 
 
 2. **Encoder's Output**:
-   ```math
-   h^L_k = \text{LSTM}(x_k, h^L_{k-1})
-   ```
+   
+   $h^L_k = \text{LSTM}(x_k, h^L_{k-1})$
+  
 
 ### Attention Mechanism
 3. **Attention Scores**:
-   ```math
-   s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}
-   ```
 
-4. **Context Vector**:
-   ```math
-   c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k
-   ```
+   $s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}$
 
-5. **Combined Representation**:
-   ```math
-   h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)
-   ```
+5. **Context Vector**:
+
+   $c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k$
+
+7. **Combined Representation**:
+
+   $h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)$
 
 ### Loss Function
 6. **Objective Function**:
-   ```math
-   \mathcal{L} = -\sum_{(q,a) \in D} \log p(a|q)
-   ```
+
+   $\mathcal{L} = -\sum_{(q,a) \in D} \log p(a|q)$
 
 ---
 
