@@ -46,9 +46,7 @@ networks with long short-term memory (LSTM) units which recursively process toke
 2. **Model Output** (Section 3.1, equation 1):
 
   Seq2Seq maps natural language input $q = x_1 \dots x_{|q|}$ to a logical form representation of its meaning $a = y_1 \dots y_{|a|}$.
-   $$
-   p(a|q) = \prod_{t=1}^{|a|} p(y_t | y_{<t}, q)
-   $$
+   $$p(a|q) = \prod_{t=1}^{|a|} p(y_t | y_{<t}, q)$$
    where $ y_{<t} = y_1 \dots y_{t-1} $
 
 3. **Predict t-th token output** (Section 3.1, equation 3)
@@ -57,21 +55,15 @@ $$ p (y_t|y_{<t}, q) = softmax(W_oh^L_t)^T|e(y_t)$$
 
 ### Attention Mechanism (Section 3.3)
 2. **Attention Scores** (Section 3.3, equation 5):
-   $$
-   s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}
-   $$
+   $$s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}$$
    Here, $ s^t_k $ represents the attention score for the $ k $-th encoder hidden state $ h^L_k $ relative to the decoder hidden state $ h^L_t $.
 
 3. **Context Vector** (Section 3.3, equation 6):
-   $$
-   c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k
-   $$
+   $$c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k$$
    The context vector $ c^t $ summarizes relevant information from the encoder hidden states $ h^L_k $.
 
 4. **Combined Representation** (Section 3.3, equation 7):
-   $$
-   h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)
-   $$
+   $$h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)$$
    Here, $ h^{att}_t $ is the combined representation of the decoder hidden state $ h^L_t $ and the context vector $ c^t $.
 
 5. **Improved equation 3 using attention** (Section 3.3, equation 8)
