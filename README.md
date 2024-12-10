@@ -29,34 +29,53 @@ The main objective is to maximize the likelihood of generating the correct logic
 ## **Implemented Equations**
 The following equations, derived from the paper, are implemented in the model:
 
-### Encoder-Decoder Framework
-1. **Decoder's Output Probability**:
 
-   $p(a|q) = \prod_{t=1}^{|a|} p(a_t | a_{<t}, q)$
+### Sequence-to-Sequence Model(Section 3.1)
 
+The encoder and decoder are two different L-layer recurrent neural
+networks with long short-term memory (LSTM) units which recursively process tokens one by one.
 
-2. **Encoder's Output**:
+1. **LSTM Representation** (Section 3.1, equation 2):
+   Let $h_l∈ \mathbf{R_n}$ denote the hidden vector at time step t and layer l. $h^l_t$ is then computed by:
+    \begin{align}
+   h^l_t = \text{LSTM}(h^{l-1}_t, h^l_{t-1})
+    \end{align}
    
-   $h^L_k = \text{LSTM}(x_k, h^L_{k-1})$
-  
 
-### Attention Mechanism
-3. **Attention Scores**:
 
-   $s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}$
+2. **Model Output** (Section 3.1, equation 1):
 
-5. **Context Vector**:
+  Seq2Seq maps natural language input $q = x_1 \dots x_{|q|}$ to a logical form representation of its meaning $a = y_1 \dots y_{|a|}$.
+   $$
+   p(a|q) = \prod_{t=1}^{|a|} p(y_t | y_{<t}, q)
+   $$
+   where $ y_{<t} = y_1 \dots y_{t-1} $
 
-   $c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k$
+3. **Predict t-th token output** (Section 3.1, equation 3)
+$$ p (y_t|y_{<t}, q) = softmax(W_oh^L_t)^T|e(y_t)$$
+---
 
-7. **Combined Representation**:
+### Attention Mechanism (Section 3.3)
+2. **Attention Scores** (Section 3.3, equation 5):
+   $$
+   s^t_k = \frac{\exp(h^L_t \cdot h^L_k)}{\sum_{j=1}^{|q|} \exp(h^L_t \cdot h^L_j)}
+   $$
+   Here, $ s^t_k $ represents the attention score for the $ k $-th encoder hidden state $ h^L_k $ relative to the decoder hidden state $ h^L_t $.
 
-   $h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)$
+3. **Context Vector** (Section 3.3, equation 6):
+   $$
+   c^t = \sum_{k=1}^{|q|} s^t_k \cdot h^L_k
+   $$
+   The context vector $ c^t $ summarizes relevant information from the encoder hidden states $ h^L_k $.
 
-### Loss Function
-6. **Objective Function**:
+4. **Combined Representation** (Section 3.3, equation 7):
+   $$
+   h^{att}_t = \tanh(W_1 h^L_t + W_2 c^t)
+   $$
+   Here, $ h^{att}_t $ is the combined representation of the decoder hidden state $ h^L_t $ and the context vector $ c^t $.
 
-   $\mathcal{L} = -\sum_{(q,a) \in D} \log p(a|q)$
+5. **Improved equation 3 using attention** (Section 3.3, equation 8)
+$$p (y_t|y_{<t}, q) = softmax(W_oh^{att}_t)^T|e(y_t)$$
 
 ---
 
