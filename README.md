@@ -36,11 +36,13 @@ The encoder and decoder are two different L-layer recurrent neural
 networks with long short-term memory (LSTM) units which recursively process tokens one by one.
 
 1. **LSTM Representation** (Section 3.1, equation 2):
-   Let $h_l∈ \mathbf{R_n}$ denote the hidden vector at time step t and layer l. $h^l_t$ is then computed by: $$h^l_t = LSTM(h^{l-1}_t, h^l_{t-1})$$
+   Let $h_l∈ \mathbf{R_n}$ denote the hidden vector at time step t and layer l. $h^l_t$ is then computed by:
+
+   $$h^l_t = LSTM(h^{l-1}_t, h^l_{t-1})$$
    
 
 
-2. **Model Output** (Section 3.1, equation 1):
+3. **Model Output** (Section 3.1, equation 1):
 
   Seq2Seq maps natural language input $q = x_1 \dots x_{|q|}$ to a logical form representation of its meaning $a = y_1 \dots y_{|a|}$.
   $$p(a|q) = \prod_{t=1}^{|a|} p(y_t | y_{<t}, q)$$
