@@ -37,9 +37,7 @@ networks with long short-term memory (LSTM) units which recursively process toke
 
 1. **LSTM Representation** (Section 3.1, equation 2):
    Let $h_l∈ \mathbf{R_n}$ denote the hidden vector at time step t and layer l. $h^l_t$ is then computed by:
-    \begin{align}
-   h^l_t = \text{LSTM}(h^{l-1}_t, h^l_{t-1})
-    \end{align}
+   $$h^l_t = \text{LSTM}(h^{l-1}_t, h^l_{t-1})$$
    
 
 
