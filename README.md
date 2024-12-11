@@ -28,10 +28,13 @@ The main objective is to maximize the likelihood of generating the correct logic
 
 ## **Project Structure**
 - **`Fall2024 Final Project.ipynb`**:
-  Implementation for the seq2seq model.
+  Implementation for the seq2seq model with attention.
 
 - **`Video`**:
-  Link: 
+  Link: https://drive.google.com/file/d/1lb5B3TbgnI-m7AItfyvncDK07eXEfilC/view?usp=drive_link
+
+- **`Contact`**:
+  Zhenke Liu(zliu328@brown.edu)
   
 
   
